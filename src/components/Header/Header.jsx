@@ -37,7 +37,7 @@ function Header() {
         <div className="flex gap-4 items-center">
           <button
             onClick={settingDefaultTheme}
-            className="flex justify-center items-center w-3 h-3 p-3 sm:w-5 sm:h-5 sm:p-5 dark:text-white bg-white/20 rounded-2xl shadow-lg shadow-black/10 backdrop-blur-sm border border-white/30 hover:opacity-60 duration-700"
+            className="flex justify-center items-center w-8 h-8 sm:w-10 sm:h-10 dark:text-white bg-white/20 rounded-full shadow-lg shadow-black/10 backdrop-blur-sm border border-black dark:border-white/30 hover:opacity-60 duration-700"
           >
             <i
               className={`${
@@ -46,12 +46,12 @@ function Header() {
             ></i>
           </button>
           <SignedOut>
-            <button className="flex justify-center items-center p-3  sm:p-2 dark:bg-white/20 text-white bg-black  rounded-2xl shadow-lg shadow-black/10 backdrop-blur-sm border border-white/30 hover:opacity-60 duration-700">
+            <button className="flex justify-center items-center p-1 px-2 text-xs sm:text-base  sm:p-2 dark:bg-white/20 text-white bg-black  rounded-2xl shadow-lg shadow-black/10 backdrop-blur-sm border border-white/30 hover:opacity-60 duration-700">
               <SignInButton />
             </button>
           </SignedOut>
           <SignedIn>
-            <div className="flex w-10 h-10 rounded-full border-white border-2 ">
+            <div className="flex w-8 h-8 sm:w-10 sm:h-10 rounded-full border-white border-2 ">
               <UserButton />
             </div>
           </SignedIn>

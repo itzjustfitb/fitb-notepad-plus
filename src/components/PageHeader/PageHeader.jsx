@@ -1,10 +1,11 @@
 import { useUser } from "@clerk/clerk-react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 function PageHeader({ setCreateNote, searchValue, setSearchValue }) {
   const { user } = useUser();
-
+  const navigate = useNavigate();
   return (
     <section className="py-5 container flex flex-col sm:flex-row gap-3 sm:gap-5 ">
       <div className="flex flex-auto relative">
@@ -22,11 +23,7 @@ function PageHeader({ setCreateNote, searchValue, setSearchValue }) {
           if (user) {
             setCreateNote(true);
           } else {
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "Please sign in first!",
-            });
+            navigate("/sign-in");
           }
         }}
         className="w-full sm:w-48 flex justify-center items-center dark:bg-dark-2 bg-black text-white p-3 rounded-md duration-300 text-xl gap-2 hover:opacity-70"

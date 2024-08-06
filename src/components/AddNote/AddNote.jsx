@@ -7,8 +7,7 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { blue, red } from "@mui/material/colors";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Swal from "sweetalert2";
 
 function AddNote({
@@ -56,6 +55,12 @@ function AddNote({
       });
       setIsEdited(false);
       setCreateNote(false);
+      setNote({
+        title: "",
+        content: "",
+        category: "",
+        date: "",
+      });
     } else {
       Swal.fire({
         icon: "error",
@@ -63,13 +68,6 @@ function AddNote({
         text: "Fill the inputs!",
       });
     }
-
-    setNote({
-      title: "",
-      content: "",
-      category: "",
-      date: "",
-    });
   };
 
   return (

@@ -7,6 +7,9 @@ import Notes from "./components/Notes/Notes";
 import PageHeader from "./components/PageHeader/PageHeader";
 import Loader from "./components/Loader/Loader";
 import { useUser } from "@clerk/clerk-react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import Home from "./components/Home/Home";
+import Auth from "./components/Auth/Auth";
 
 function App() {
   const [createNote, setCreateNote] = useState(false);
@@ -15,7 +18,7 @@ function App() {
   const [searchValue, setSearchValue] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useUser();
-
+  const location = useLocation();
   useEffect(() => {
     setIsLoading(true);
     document.body.style.overflow = "hidden";
@@ -44,35 +47,28 @@ function App() {
   return (
     <main className="flex flex-col font-poppins dark:bg-dark">
       {isLoading ? <Loader /> : ""}
-      <Header />
-      <PageHeader
-        setSearchValue={setSearchValue}
-        setCreateNote={setCreateNote}
-        searchValue={searchValue}
-      />
-      <Notes
-        notes={notes}
-        setNotes={setNotes}
-        setCreateNote={setCreateNote}
-        note={note}
-        setNote={setNote}
-        setIsEdited={setIsEdited}
-        searchValue={searchValue}
-      />
-      {createNote ? (
-        <AddNote
-          note={note}
-          setNote={setNote}
-          notes={notes}
-          setNotes={setNotes}
-          setCreateNote={setCreateNote}
-          isEdited={isEdited}
-          setIsEdited={setIsEdited}
+      {location.pathname !== "/sign-in" ? <Header /> : ""}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              setSearchValue={setSearchValue}
+              setCreateNote={setCreateNote}
+              searchValue={searchValue}
+              notes={notes}
+              setNotes={setNotes}
+              note={note}
+              setNote={setNote}
+              setIsEdited={setIsEdited}
+              isEdited={isEdited}
+              createNote={createNote}
+            />
+          }
         />
-      ) : (
-        ""
-      )}
-      <Footer />
+        <Route path="/sign-in" element={<Auth />} />
+      </Routes>
+      {location.pathname !== "/sign-in" ? <Footer /> : ""}
     </main>
   );
 }
